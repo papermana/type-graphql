@@ -1,13 +1,22 @@
+import { AuthCheckerUseErrorMode, AuthCheckerUseNullMode } from "../utils/symbols";
 import { ClassType } from "./ClassType";
 import { ResolverData } from "./ResolverData";
+
+export type AuthCheckerReturnType =
+  | boolean
+  | typeof AuthCheckerUseErrorMode
+  | typeof AuthCheckerUseNullMode;
 
 export type AuthCheckerFn<TContextType = {}, TRoleType = string> = (
   resolverData: ResolverData<TContextType>,
   roles: TRoleType[],
-) => boolean | Promise<boolean>;
+) => AuthCheckerReturnType | Promise<AuthCheckerReturnType>;
 
 export type AuthCheckerInterface<TContextType = {}, TRoleType = string> = {
-  check(resolverData: ResolverData<TContextType>, roles: TRoleType[]): boolean | Promise<boolean>;
+  check(
+    resolverData: ResolverData<TContextType>,
+    roles: TRoleType[],
+  ): AuthCheckerReturnType | Promise<AuthCheckerReturnType>;
 };
 
 export type AuthChecker<TContextType = {}, TRoleType = string> =

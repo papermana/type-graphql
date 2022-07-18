@@ -11,3 +11,4 @@ export {
   defaultPrintSchemaOptions,
 } from "./emitSchemaDefinitionFile";
 export { ContainerType, ContainerGetter } from "./container";
+export * from "./symbols";
